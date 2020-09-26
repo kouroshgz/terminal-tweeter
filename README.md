@@ -30,4 +30,14 @@ In the script, the API keys will need to placed in the corresponding "consumer_k
 When the script is ran, the user will be presented with an options menu.  
 Input the key that corresponds to the function you wish to call.  
 
-Currently, only the pushTweet function has been implemented, which will post a Tweet on your timeline.  
+# Features:
+
+**Push Tweet Function**:   
+Allows user to tweet from the command line  
+
+**Get Timeline Function**:  
+Pulls x amount of tweets from the users home timeline and displays them in the command line      
+
+**Get User Timeline Function**:   
+Pulls x amount of tweets made by a specified user and displays them in the command line.   
+Username must be in the format @[USERNAME] 
