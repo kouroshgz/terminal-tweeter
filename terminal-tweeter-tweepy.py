@@ -1,4 +1,5 @@
 import tweepy
+import sys
 
 
 consumer_key = ""
@@ -15,7 +16,7 @@ print(api.me().name)
 def intro():
     print("TERMINAL-TWEETER: A CLI TWITTER INTERFACE")
     print("FUNCTIONS: ")
-    functions = ["(A) Tweet"]
+    functions = ["(A) Tweet", "(B) Get Timeline", "(C) Get Someone Elses Tweets", "(Q) Exit"]
     for i in functions:
         print(i)
     command = input("What would you like to do?")
@@ -38,12 +39,33 @@ def pushTweet():
         except tweepy.error.TweepError as e:
             print(e)
 
+def getTimeline():
+     number_of_tweets = input("How many Tweets?")
+     for status in tweepy.Cursor(api.home_timeline,tweet_mode="extended", exclude_replies= True).items(int(number_of_tweets)):
+        print(status.user.screen_name)
+        print(status.id)
+        print(status.full_text)
+        print("\n")
 
-funcDict = {'A': pushTweet, }
+def getUserTimeline():
+    username= input("Enter username: (ex: @twitter ) ")
+    number_of_tweets = input("How many Tweets?")
+    for status in tweepy.Cursor(api.user_timeline, screen_name = username, tweet_mode="extended", exclude_replies= True).items(int(number_of_tweets)):
+        print(status.user.screen_name)
+        print(status.id)
+        print(status.full_text)
+        print("\n")
+
+def exit():
+    sys.exit();
+
+funcDict = {'A': pushTweet, 'B': getTimeline, 'C' : getUserTimeline, 'Q' : exit }
 
 
 def main():
-    funcDict[intro()]()
+    repeat = True;
+    while repeat:
+        funcDict[intro()]()
 
 
 main()
